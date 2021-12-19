@@ -2,10 +2,7 @@ package com.point876solutions.dentalmanagement.models
 
 import com.point876solutions.dentalmanagement.models.Enum.ActiveStatus
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.Email
 
 @Entity
@@ -22,6 +19,7 @@ class EmergencyContact(
     private var receiveText: Boolean?,
     private var notes: String?,
     private var expiryDate: Date?,
+    @Enumerated(EnumType.STRING)
     private var status: ActiveStatus?
 ) {
 

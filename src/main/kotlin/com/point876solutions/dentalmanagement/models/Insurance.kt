@@ -2,10 +2,7 @@ package com.point876solutions.dentalmanagement.models
 
 import com.point876solutions.dentalmanagement.models.Enum.InsuranceStatus
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Insurance {
@@ -20,5 +17,6 @@ class Insurance {
     private var policyHolderLastName: String? = null
     private var relationshipWithPolicyHolder: String? = null
     private var expiryDate: Date? = null
+    @Enumerated(EnumType.STRING)
     private var status: InsuranceStatus? = null
 }

@@ -1,6 +1,7 @@
 package com.point876solutions.dentalmanagement.models
 
 import com.point876solutions.dentalmanagement.models.Enum.MartialStatus
+import com.point876solutions.dentalmanagement.models.Enum.PatientStatus
 import com.point876solutions.dentalmanagement.models.Enum.Sex
 import java.util.*
 import javax.persistence.*
@@ -22,7 +23,10 @@ class Patient {
     private var sex: Sex? = null
     private var trn: String? = null
 
+    @Enumerated(EnumType.STRING)
     private var maritalStatus: MartialStatus? = null
+    @Enumerated(EnumType.STRING)
+    private var patientStatus: PatientStatus = PatientStatus.ALIVE
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(

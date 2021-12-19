@@ -1,10 +1,7 @@
 package com.point876solutions.dentalmanagement.models
 
 import com.point876solutions.dentalmanagement.models.Enum.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class InitialClinicalExamination {
@@ -26,10 +23,15 @@ class InitialClinicalExamination {
     private var isUnderPhysicianCare: Boolean? = null
     private var hadBleeding: Boolean? = null
     private var reactionToAnesthetic: Boolean? = null
+    @Enumerated(EnumType.STRING)
     private var oralHygieneCondition: OralHygieneCondition? = null
+    @Enumerated(EnumType.STRING)
     private var calculusCondition:  CalculusCondition? = null
+    @Enumerated(EnumType.STRING)
     private var plaqueCondition: PlaqueCondition? = null
+    @Enumerated(EnumType.STRING)
     private var gingivalBleedingCondition: GingivalBleedingCondition? = null
+    @Enumerated(EnumType.STRING)
     private var perioExam: PerioExam? = null
     private var comments: String? = null
 
