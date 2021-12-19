@@ -29,5 +29,13 @@ class EmergencyContact(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long? = null
 
+    fun getFirstName(): String?{
+        return this.firstName
+    }
+
+    fun getMiddleName(): String? {
+        return this.middleName
+    }
+
 
 }

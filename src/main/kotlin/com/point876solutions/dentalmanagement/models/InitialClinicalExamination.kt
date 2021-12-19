@@ -1,5 +1,6 @@
 package com.point876solutions.dentalmanagement.models
 
+import com.point876solutions.dentalmanagement.models.Enum.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -25,7 +26,12 @@ class InitialClinicalExamination {
     private var isUnderPhysicianCare: Boolean? = null
     private var hadBleeding: Boolean? = null
     private var reactionToAnesthetic: Boolean? = null
-
+    private var oralHygieneCondition: OralHygieneCondition? = null
+    private var calculusCondition:  CalculusCondition? = null
+    private var plaqueCondition: PlaqueCondition? = null
+    private var gingivalBleedingCondition: GingivalBleedingCondition? = null
+    private var perioExam: PerioExam? = null
+    private var comments: String? = null
 
 
 }
