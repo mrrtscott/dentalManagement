@@ -2,10 +2,7 @@ package com.point876solutions.dentalmanagement.models
 
 import com.point876solutions.dentalmanagement.models.Enum.Sex
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Patient {
@@ -19,7 +16,13 @@ class Patient {
     @Enumerated(EnumType.STRING)
     private var sex: Sex? = null
     private var trn: String? = null
-    private var address: Address? = null
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "patient_addresses",
+        joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "address_id", referencedColumnName = "id")]
+    )
+    private var address: List<Address>? = null
 
 
 }
