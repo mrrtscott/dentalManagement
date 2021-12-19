@@ -1,5 +1,6 @@
 package com.point876solutions.dentalmanagement.models
 
+import com.point876solutions.dentalmanagement.models.Enum.ActiveStatus
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -8,21 +9,25 @@ import javax.persistence.Id
 import javax.validation.constraints.Email
 
 @Entity
-class EmergencyContact {
+class EmergencyContact(
+    private var firstName: String?,
+    private var middleName: String?,
+    private var lastName: String?,
+    private var relationshipToPatient: String?,
+    @Email
+    private var email: String?,
+    private var phoneNumber: String?,
+    private var receiveCall: Boolean?,
+    private var receiveEmail: Boolean?,
+    private var receiveText: Boolean?,
+    private var notes: String?,
+    private var expiryDate: Date?,
+    private var status: ActiveStatus?
+) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long? = null
-    private var firstName: String? = null
-    private var middleName: String? = null
-    private var lastName: String ? = null
-    @Email
-    private var email: String? = null
-    private var phoneNumber: String? = null
-    private var receiveCall: Boolean? = null
-    private var receiveEmail: Boolean? = null
-    private var receiveText: Boolean? = null
-    private var notes: String? = null
-    private var expiryDate: Date? = null
+
 
 }
