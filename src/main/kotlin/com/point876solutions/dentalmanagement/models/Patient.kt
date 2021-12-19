@@ -9,58 +9,93 @@ import javax.persistence.*
 import javax.validation.constraints.Email
 
 @Entity
-class Patient(
+class Patient{
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private var id: Long? = null
+
     @Email(message = "Email format not valid")
     @Column(unique = true, updatable = true)
-    private var email: String?,
-    private var firstName: String?,
-    private var middleName: String?,
-    private var lastName: String?,
-    private var dateOfBirth: Date?,
+    private var email: String? = null
+    private var firstName: String? = null
+    private var middleName: String? = null
+    private var lastName: String? = null
+    private var dateOfBirth: Date? = null
     @Enumerated(EnumType.STRING)
-    private var sex: Sex?,
+    private var sex: Sex? = null
     @Column(unique = true, updatable = false)
-    private var trn: String?,
+    private var trn: String? = null
     @Enumerated(EnumType.STRING)
-    private var maritalStatus: MartialStatus?,
-    @Enumerated(EnumType.STRING)
-    private var patientStatus: PatientStatus,
+    private var maritalStatus: MartialStatus? = null
+
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
         name = "patient_emergency_contacts",
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "emergency_contact_id", referencedColumnName = "id")]
     )
-    private var emergencyContact: List<EmergencyContact>?,
+    private var emergencyContact: List<EmergencyContact>? = null
+
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
         name = "patient_addresses",
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "address_id", referencedColumnName = "id")]
     )
-    private var address: List<Address>?,
+    private var address: List<Address>? = null
+
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
         name = "patient_phone",
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "phone_id", referencedColumnName = "id")]
     )
-    private var phone: List<Phone>?,
+    private var phone: List<Phone>? = null
+
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
         name = "patient_appointment",
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "appointment_id", referencedColumnName = "id")]
     )
-    private var appointment: List<Appointment>?
-) {
+    private var appointment: List<Appointment>? = null
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long =0
+    @Enumerated(EnumType.STRING)
+    private var patientStatus: PatientStatus = PatientStatus.ALIVE
+
+    constructor(
+        email: String?,
+        firstName: String?,
+        middleName: String?,
+        lastName: String?,
+        dateOfBirth: Date?,
+        sex: Sex?,
+        trn: String?,
+        maritalStatus: MartialStatus?,
+        emergencyContact: List<EmergencyContact>?,
+        address: List<Address>?,
+        phone: List<Phone>?,
+        appointment: List<Appointment>?
+    ) {
+        this.email = email
+        this.firstName = firstName
+        this.middleName = middleName
+        this.lastName = lastName
+        this.dateOfBirth = dateOfBirth
+        this.sex = sex
+        this.trn = trn
+        this.maritalStatus = maritalStatus
+        this.emergencyContact = emergencyContact
+        this.address = address
+        this.phone = phone
+        this.appointment = appointment
+        this.patientStatus = PatientStatus.ALIVE
+    }
 
 
-    fun getId(): Long{
+    fun getId(): Long?{
         return this.id
     }
 
@@ -117,6 +152,10 @@ class Patient(
 
     fun getAppointment(): List<Appointment>?{
         return this.appointment
+    }
+
+    fun setPhone(phone: List<Phone>){
+        this.phone = phone
     }
 
 
