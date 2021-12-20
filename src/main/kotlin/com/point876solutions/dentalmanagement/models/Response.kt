@@ -19,7 +19,7 @@ open class Response(
     protected var data: Map<Any, Any>?
 ) {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    fun getTimes(): LocalDateTime? {
+    fun getResponseTime(): LocalDateTime? {
         return this.timestamp
     }
 

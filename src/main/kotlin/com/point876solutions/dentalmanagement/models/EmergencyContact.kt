@@ -35,5 +35,45 @@ class EmergencyContact(
         return this.middleName
     }
 
+    fun getLastName(): String?{
+        return this.lastName
+    }
+
+    fun getRelationshipToPatient(): String?{
+        return this.relationshipToPatient
+    }
+
+    fun getEmail(): String?{
+        return this.email
+    }
+
+    fun getPhoneNumber(): String?{
+        return this.phoneNumber
+    }
+
+    fun getReceiveCall(): Boolean?{
+        return this.receiveCall
+    }
+
+    fun getReceiveEmail(): Boolean?{
+        return this.receiveEmail
+    }
+
+    fun getReceiveText(): Boolean?{
+        return this.receiveText
+    }
+
+    fun getNotes(): String?{
+        return this.notes
+    }
+
+    fun getExpiryDate(): Date?{
+        return this.expiryDate
+    }
+
+    fun getStatus(): ActiveStatus?{
+        return this.status
+    }
+
 
 }

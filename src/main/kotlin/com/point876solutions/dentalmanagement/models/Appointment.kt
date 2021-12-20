@@ -18,4 +18,20 @@ class Appointment(
     private var id: Long? = null
     private lateinit var setAppointmentDate: LocalDateTime
 
+    fun getId(): Long?{
+        return this.id
+    }
+
+    fun getRequestedAppointmentDate(): LocalDateTime{
+        return this.requestedAppointmentDate
+    }
+
+    fun getAppointmentStatus(): AppointmentStatus{
+        return this.appointmentStatus
+    }
+
+    fun getNotes(): String?{
+        return this.notes
+    }
+
 }

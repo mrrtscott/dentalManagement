@@ -39,7 +39,15 @@ class PatientController {
     }
 
     @GetMapping
-    fun getAllPatients(): List<Patient>?{
-        return this.patientService.findAllPatients()
+    fun getAllPatients():  ResponseEntity<Response>{
+        return ResponseEntity.ok().body(Response(
+            LocalDateTime.now(),
+            HttpStatus.OK.value(),
+            HttpStatus.OK,
+            "",
+            "All vaccines retrieved",
+            "",
+            mapOf("patients" to (patientService.findAllPatients()?.toList() ?: listOf()))
+        ))
     }
 }

@@ -36,7 +36,7 @@ class Patient{
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "emergency_contact_id", referencedColumnName = "id")]
     )
-    private var emergencyContact: List<EmergencyContact>? = null
+    private var emergencyContact: MutableList<EmergencyContact>? = null
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
@@ -44,7 +44,7 @@ class Patient{
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "address_id", referencedColumnName = "id")]
     )
-    private var address: List<Address>? = null
+    private var address: MutableList<Address>? = null
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
@@ -52,7 +52,7 @@ class Patient{
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "phone_id", referencedColumnName = "id")]
     )
-    private var phone: List<Phone>? = null
+    private var phone: MutableList<Phone>? = null
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
@@ -60,7 +60,7 @@ class Patient{
         joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "appointment_id", referencedColumnName = "id")]
     )
-    private var appointment: List<Appointment>? = null
+    private var appointment: MutableList<Appointment>? = null
 
     @Enumerated(EnumType.STRING)
     private var patientStatus: PatientStatus = PatientStatus.ALIVE
@@ -74,10 +74,10 @@ class Patient{
         sex: Sex?,
         trn: String?,
         maritalStatus: MartialStatus?,
-        emergencyContact: List<EmergencyContact>?,
-        address: List<Address>?,
-        phone: List<Phone>?,
-        appointment: List<Appointment>?
+        emergencyContact: MutableList<EmergencyContact>?,
+        address: MutableList<Address>?,
+        phone: MutableList<Phone>?,
+        appointment: MutableList<Appointment>?
     ) {
         this.email = email
         this.firstName = firstName
@@ -138,11 +138,11 @@ class Patient{
     }
 
 
-    fun getEmergencyContact(): List<EmergencyContact>?{
+    fun getEmergencyContact(): MutableList<EmergencyContact>?{
         return this.emergencyContact
     }
 
-    fun getAddress(): List<Address>?{
+    fun getAddress(): MutableList<Address>?{
         return this.address
     }
 
@@ -154,8 +154,24 @@ class Patient{
         return this.appointment
     }
 
-    fun setPhone(phone: List<Phone>){
+    fun setPhone(phone: MutableList<Phone>){
         this.phone = phone
+    }
+
+    fun addEmergencyContact(emergencyContact: EmergencyContact){
+        this.emergencyContact?.add(emergencyContact)
+    }
+
+    fun addAddress(address: Address){
+        this.address?.add(address)
+    }
+
+    fun addPhone(phone: Phone){
+        this.phone?.add(phone)
+    }
+
+    fun addAppointment(appointment: Appointment){
+        this.appointment?.add(appointment)
     }
 
 
