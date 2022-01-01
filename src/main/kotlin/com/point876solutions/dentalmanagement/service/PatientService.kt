@@ -10,4 +10,5 @@ interface PatientService {
     fun findPatientsByFirstName(firstName:String):List<Patient>?
     fun findPatientsByLastName(lastName:String):List<Patient>?
     fun findPatientsByEmail(email:String):List<Patient>?
+    fun deletePatient(id: Long)
 }

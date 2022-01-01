@@ -35,4 +35,8 @@ class PatientServiceImpl :PatientService {
     override fun findPatientsByEmail(email: String): List<Patient>? {
         return patientRepository?.findPatientsByEmail(email)
     }
+
+    override fun deletePatient(id: Long) {
+        patientRepository?.deleteById(id)
+    }
 }

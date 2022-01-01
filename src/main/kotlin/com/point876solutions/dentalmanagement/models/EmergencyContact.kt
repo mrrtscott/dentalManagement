@@ -1,5 +1,6 @@
 package com.point876solutions.dentalmanagement.models
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.point876solutions.dentalmanagement.models.Enum.ActiveStatus
 import java.util.*
 import javax.persistence.*
@@ -18,14 +19,15 @@ class EmergencyContact(
     private var receiveEmail: Boolean?,
     private var receiveText: Boolean?,
     private var notes: String?,
-    private var expiryDate: Date?,
-    @Enumerated(EnumType.STRING)
-    private var status: ActiveStatus?
+    private var expiryDate: Date?
 ) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long? = null
+
+    @Enumerated(EnumType.STRING)
+    private var status: ActiveStatus = ActiveStatus.ACTIVE
 
     fun getFirstName(): String?{
         return this.firstName
@@ -67,6 +69,7 @@ class EmergencyContact(
         return this.notes
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     fun getExpiryDate(): Date?{
         return this.expiryDate
     }
