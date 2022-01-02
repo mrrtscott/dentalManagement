@@ -62,6 +62,17 @@ class Patient{
     )
     private var appointment: MutableList<Appointment>? = null
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "patient_insurance",
+        joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "insurance_id", referencedColumnName = "id")]
+    )
+    private var insurance: MutableList<Insurance>? = null
+
+
+
+
     @Enumerated(EnumType.STRING)
     private var patientStatus: PatientStatus = PatientStatus.ALIVE
 
@@ -154,6 +165,10 @@ class Patient{
         return this.appointment
     }
 
+    fun getInsurance(): List<Insurance>?{
+        return this.insurance
+    }
+
     fun setPhone(phone: MutableList<Phone>){
         this.phone = phone
     }
@@ -173,6 +188,14 @@ class Patient{
     fun addAppointment(appointment: Appointment){
         this.appointment?.add(appointment)
     }
+
+    fun addInsurance(insurance: Insurance){
+        this.insurance?.add(insurance)
+
+    }
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.point876solutions.dentalmanagement.models
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.point876solutions.dentalmanagement.models.Enum.InsuranceStatus
 import java.util.*
 import javax.persistence.*
@@ -52,22 +53,24 @@ class Insurance {
         return this.policyNumber
     }
 
-    fun getPolicyHolderFirstName(){
+    fun getPolicyHolderFirstName(): String?{
+        return this.policyHolderFirstName
 
     }
 
-    fun getPolicyHolderMiddleName(){
-
+    fun getPolicyHolderMiddleName(): String?{
+        return this.policyHolderMiddleName
     }
 
-    fun getPolicyHolderLastName(){
-
+    fun getPolicyHolderLastName(): String?{
+        return this.policyHolderLastName
     }
 
     fun getRelationshipWithPolicyHolder(): String?{
         return this.relationshipWithPolicyHolder
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     fun getExpiryDate(): Date? {
         return this.expiryDate
     }

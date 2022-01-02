@@ -21,6 +21,9 @@ class Appointment {
     @Enumerated(EnumType.STRING)
     private var appointmentStatus: AppointmentStatus = AppointmentStatus.CREATED
 
+
+
+
     constructor(requestedAppointmentDate: Date?, appointmentReminder: Boolean?, notes: String?) {
         this.requestedAppointmentDate = requestedAppointmentDate
         this.appointmentReminder = appointmentReminder

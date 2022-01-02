@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.time.LocalDateTime
 import javax.validation.Valid
 
+@Suppress("DuplicatedCode")
 @RestController
 @RequestMapping("/patient")
 class PatientController {
@@ -155,6 +156,34 @@ class PatientController {
         )
 
 
+
+
+    }
+
+    @PostMapping("/add-insurance/{patientId}")
+    fun createInsurance(@PathVariable patientId: Long, @RequestBody inputInsurance: @Valid Insurance) : ResponseEntity<Response>{
+
+        val patient = patientService.findPatientById(patientId)
+        patient?.addInsurance(inputInsurance)
+        if (patient != null) {
+            patientService.savePatient(patient)
+        }
+
+        val location = ServletUriComponentsBuilder.fromCurrentServletMapping()
+            .path("/{patientId}")
+            .buildAndExpand(patient?.getId()).toUri()
+        val patientReceived:Patient = patientService.findPatientById(patientId)!!
+        return ResponseEntity.created(location).body(
+            Response(
+                LocalDateTime.now(),
+                HttpStatus.CREATED.value(),
+                HttpStatus.CREATED,
+                "",
+                "",
+                "",
+                mapOf("Patient" to patientReceived)
+            )
+        )
 
 
     }
