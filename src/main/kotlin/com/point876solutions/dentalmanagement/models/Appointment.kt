@@ -29,6 +29,7 @@ class Appointment {
         this.appointmentReminder = appointmentReminder
         this.notes = notes
         this.appointmentStatus = AppointmentStatus.CREATED
+
     }
 
 
