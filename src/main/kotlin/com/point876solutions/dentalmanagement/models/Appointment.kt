@@ -21,6 +21,14 @@ class Appointment {
     @Enumerated(EnumType.STRING)
     private var appointmentStatus: AppointmentStatus = AppointmentStatus.CREATED
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "appointment_invoice",
+        joinColumns = [javax.persistence.JoinColumn(name = "appointmentId", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "invoice_id", referencedColumnName = "id")]
+    )
+    private var invoice: MutableList<Invoice>? = null
+
 
 
 
@@ -54,8 +62,16 @@ class Appointment {
         return this.notes
     }
 
+    fun getInvoice(): MutableList<Invoice>? {
+        return this.invoice
+    }
+
     fun setRequestedAppointmentDate(requestedAppointmentDate: Date){
         this.requestedAppointmentDate = requestedAppointmentDate
+    }
+
+    fun addInvoice(invoice: Invoice){
+        this.invoice?.add(invoice)
     }
 
 }

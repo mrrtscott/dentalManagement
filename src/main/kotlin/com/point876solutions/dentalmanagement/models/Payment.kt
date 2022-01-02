@@ -67,9 +67,13 @@ class Payment {
     }
 
 
+
+
     fun getValue(): Double?{
         return this.value
     }
+
+
 
 
 

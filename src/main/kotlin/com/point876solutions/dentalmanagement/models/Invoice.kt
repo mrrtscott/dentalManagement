@@ -45,23 +45,21 @@ class Invoice {
     private var subTotalDentalCharge: Double? = 0.00
     private var insurancePaymentValue: Double? = 0.00
     private var totalDue: Double? = 0.00
-    private var taxCharge: Double? = subTotalDentalCharge?.times(0.015)
+    private var taxCharge: Double? = 0.00
     private var amountPaid: Double? = 0.00
     private var balance: Double? = 0.00
 
     constructor(
-        generatedDate: LocalDateTime?,
         insurancePolicy: MutableList<Insurance>?,
         dentalCharge: MutableList<DentalCharge>?,
         insurancePaymentValue: Double?,
-        payment: MutableList<Payment>?
     ) {
-        this.generatedDate = generatedDate
         this.insurancePolicy = insurancePolicy
         this.dentalCharge = dentalCharge
         this.insurancePaymentValue = insurancePaymentValue
         this.subTotalDentalCharge = calculateDentalCharges(this.dentalCharge)
         this.totalDue = (this.subTotalDentalCharge)?.minus((this.insurancePaymentValue!!))?.plus(this.taxCharge!!)
+        this.taxCharge = subTotalDentalCharge?.times(0.015)
         this.balance = this.totalDue?.minus(this.amountPaid!!)
         calculatePayment()
     }
@@ -93,8 +91,56 @@ class Invoice {
     fun addPayment(payment: Payment){
         this.payment?.add(payment)
         calculatePayment()
+        this.balance = this.totalDue?.minus(this.amountPaid!!)
 
     }
+
+    fun getId(): Long?{
+        return this.id
+    }
+
+    fun getGeneratedDate(): LocalDateTime? {
+        return this.generatedDate
+    }
+
+    fun getInsurancePolicy(): MutableList<Insurance>? {
+        return this.insurancePolicy
+    }
+
+    fun getDentalCharge(): MutableList<DentalCharge>? {
+        return this.dentalCharge
+    }
+
+    fun getPayment(): MutableList<Payment>? {
+        return this.payment
+    }
+
+    fun getSubTotalDentalCharge(): Double? {
+        return this.subTotalDentalCharge
+    }
+
+    fun getInsurancePaymentValue(): Double? {
+        return this.insurancePaymentValue
+    }
+
+    fun getTotalDue(): Double? {
+        return this.totalDue
+    }
+
+    fun getTaxCharge(): Double? {
+        return this.taxCharge
+    }
+
+    fun getAmountPaid(): Double? {
+        return this.amountPaid
+    }
+
+    fun getBalance(): Double? {
+        return this.balance
+    }
+
+
+
 
 
 
