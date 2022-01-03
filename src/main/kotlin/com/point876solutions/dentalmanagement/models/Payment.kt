@@ -1,12 +1,10 @@
 package com.point876solutions.dentalmanagement.models
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.point876solutions.dentalmanagement.models.Enum.PaymentType
 import org.hibernate.annotations.CreationTimestamp
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 class Payment {
@@ -16,6 +14,7 @@ class Payment {
     private var id: Long? = null
     @CreationTimestamp
     private var paymentDate: Date? = null
+    @Enumerated(EnumType.STRING)
     private var type: PaymentType? = null
     private var cardType: String? = null
     private var lastFourDigits: String? = null
@@ -28,7 +27,7 @@ class Payment {
     private var value: Double? = null
 
     //Debit and Credit Cards
-    constructor(paymentDate: Date?, type: PaymentType?, cardType: String?, lastFourDigits: String?, value: Double?) {
+    constructor(type: PaymentType?, cardType: String?, lastFourDigits: String?, value: Double?) {
         this.paymentDate = paymentDate
         this.type = type
         this.cardType = cardType
@@ -38,7 +37,6 @@ class Payment {
 
     //Cheque
     constructor(
-        paymentDate: Date?,
         type: PaymentType?,
         drawer: String?,
         payee: String?,
@@ -60,23 +58,66 @@ class Payment {
     }
 
     //Cash
-    constructor(paymentDate: Date?, type: PaymentType?, value: Double?) {
+    constructor(type: PaymentType?, value: Double?) {
         this.paymentDate = paymentDate
         this.type = type
         this.value = value
     }
 
+    fun getId(): Long? {
+        return this.id
+    }
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    fun getPaymentDate(): Date? {
+        return this.paymentDate
+    }
+
+     fun getType(): PaymentType? {
+         return this.type
+     }
+
+    fun getCardType(): String? {
+        return this.cardType
+    }
+
+    fun getLastFourDigits(): String? {
+        return this.lastFourDigits
+    }
+
+    fun getDrawer(): String? {
+        return this.drawer
+    }
+
+    fun getPayee(): String? {
+        return this.payee
+
+    }
+
+    fun getChequeNumber(): String? {
+        return this.chequeNumber
+
+    }
+
+    fun getChequeDate(): String? {
+        return this.chequeDate
+
+    }
+
+    fun getRoutingNumber(): String? {
+        return this.routingNumber
+
+    }
+
+    fun getAccountNumber(): String? {
+        return this.accountNumber
+
+    }
 
 
     fun getValue(): Double?{
         return this.value
     }
-
-
-
-
-
 
 
 }

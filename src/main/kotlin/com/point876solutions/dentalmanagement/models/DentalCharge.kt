@@ -18,4 +18,12 @@ class DentalCharge {
     fun getCharge(): Double{
         return this.charge
     }
+
+    fun getCode(): String? {
+        return this.code
+    }
+
+    fun getProcedure(): String? {
+        return this.procedure
+    }
 }

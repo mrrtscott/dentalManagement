@@ -1,5 +1,7 @@
 package com.point876solutions.dentalmanagement.models
 
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.point876solutions.dentalmanagement.models.Enum.InvoiceStatus
 import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -48,6 +50,7 @@ class Invoice {
     private var taxCharge: Double? = 0.00
     private var amountPaid: Double? = 0.00
     private var balance: Double? = 0.00
+    private var invoiceStatus: InvoiceStatus? = null
 
     constructor(
         insurancePolicy: MutableList<Insurance>?,
@@ -62,6 +65,7 @@ class Invoice {
         this.taxCharge = subTotalDentalCharge?.times(0.015)
         this.balance = this.totalDue?.minus(this.amountPaid!!)
         calculatePayment()
+        invoiceStatus = InvoiceStatus.CREATED
     }
 
     private fun calculateDentalCharges(dentalCharges: MutableList<DentalCharge>?): Double{
@@ -92,13 +96,21 @@ class Invoice {
         this.payment?.add(payment)
         calculatePayment()
         this.balance = this.totalDue?.minus(this.amountPaid!!)
+        reEvaluateStatus()
 
+    }
+
+    fun reEvaluateStatus(){
+        if(this.balance!! <= 0){
+            invoiceStatus = InvoiceStatus.PAID
+        }
     }
 
     fun getId(): Long?{
         return this.id
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
     fun getGeneratedDate(): LocalDateTime? {
         return this.generatedDate
     }
@@ -138,6 +150,12 @@ class Invoice {
     fun getBalance(): Double? {
         return this.balance
     }
+
+    fun getInvoiceStatus(): InvoiceStatus? {
+        return this.invoiceStatus
+    }
+
+
 
 
 
