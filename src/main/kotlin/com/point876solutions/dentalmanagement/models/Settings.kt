@@ -13,6 +13,8 @@ class Settings {
     private var tagline: String? = null
     private var trn: String? = null
 
+
+
     private var addressLine1: String? = null
     private var addressLine2: String? = null
     private var addressLine3: String? = null
