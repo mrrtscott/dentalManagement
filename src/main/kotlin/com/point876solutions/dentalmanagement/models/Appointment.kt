@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import com.point876solutions.dentalmanagement.models.Enum.AppointmentStatus
 import java.util.*
 import javax.persistence.*
+import javax.validation.constraints.Size
 
 @Entity
 class Appointment {
@@ -14,12 +15,16 @@ class Appointment {
 
     private var requestedAppointmentDate: Date? = null
     private var appointmentReminder: Boolean? = null
+
+    @Column(columnDefinition = "LONGTEXT")
     private var notes: String? = null
 
     private  var setAppointmentDate: Date? = null
 
     @Enumerated(EnumType.STRING)
     private var appointmentStatus: AppointmentStatus = AppointmentStatus.CREATED
+
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
@@ -54,6 +59,11 @@ class Appointment {
         return this.requestedAppointmentDate
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss")
+    fun getSetAppointmentDate(): Date? {
+        return this.setAppointmentDate
+    }
+
     fun getAppointmentStatus(): AppointmentStatus{
         return this.appointmentStatus
     }
@@ -65,6 +75,9 @@ class Appointment {
     fun getInvoice(): MutableList<Invoice>? {
         return this.invoice
     }
+
+
+
 
     fun setRequestedAppointmentDate(requestedAppointmentDate: Date){
         this.requestedAppointmentDate = requestedAppointmentDate

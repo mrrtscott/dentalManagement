@@ -100,7 +100,7 @@ class Invoice {
 
     }
 
-    fun reEvaluateStatus(){
+    private fun reEvaluateStatus(){
         if(this.balance!! <= 0){
             invoiceStatus = InvoiceStatus.PAID
         }

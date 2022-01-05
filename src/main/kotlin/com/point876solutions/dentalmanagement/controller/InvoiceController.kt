@@ -47,7 +47,7 @@ class InvoiceController {
         }
 
         val location = ServletUriComponentsBuilder.fromCurrentServletMapping()
-            .path("/{patientId}")
+            .path("invoice/{invoiceId}")
             .buildAndExpand(invoice?.getId()).toUri()
         val receivedInvoice: Invoice = invoiceService.findInvoiceId(invoiceId)!!
 
@@ -59,7 +59,29 @@ class InvoiceController {
                 "",
                 "",
                 "",
-                mapOf("Invoice" to receivedInvoice)
+                mapOf("invoice" to receivedInvoice)
+            ))
+
+    }
+
+    @GetMapping("/{invoiceId}")
+    fun getInvoice(@PathVariable invoiceId: Long) : ResponseEntity<Response>{
+        var invoice = invoiceService.findInvoiceId(invoiceId)
+
+        val location = ServletUriComponentsBuilder.fromCurrentServletMapping()
+            .path("invoice/{invoiceId}")
+            .buildAndExpand(invoice?.getId()).toUri()
+        val receivedInvoice: Invoice = invoiceService.findInvoiceId(invoiceId)!!
+
+        return ResponseEntity.created(location).body(
+            Response(
+                LocalDateTime.now(),
+                HttpStatus.OK.value(),
+                HttpStatus.OK,
+                "",
+                "",
+                "",
+                mapOf("invoice" to receivedInvoice)
             ))
 
     }

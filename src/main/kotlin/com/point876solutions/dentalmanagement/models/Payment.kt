@@ -25,6 +25,7 @@ class Payment {
     private var routingNumber: String? = null
     private var accountNumber: String? = null
     private var value: Double? = null
+    //discount
 
     //Debit and Credit Cards
     constructor(type: PaymentType?, cardType: String?, lastFourDigits: String?, value: Double?) {

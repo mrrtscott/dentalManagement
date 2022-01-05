@@ -70,6 +70,22 @@ class Patient{
     )
     private var insurance: MutableList<Insurance>? = null
 
+    @OneToMany(fetch =  FetchType.LAZY, cascade =  [CascadeType.ALL])
+    @JoinTable(
+        name = "patient_medical_records",
+        joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "insurance_id", referencedColumnName = "id")]
+    )
+    private var medicalRecord: MutableList<MedicalRecordEntry>?= null
+
+    @OneToMany(fetch =  FetchType.LAZY, cascade =  [CascadeType.ALL])
+    @JoinTable(
+        name = "patient_initial_medical_records",
+        joinColumns = [javax.persistence.JoinColumn(name = "patientId", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "initial_Clinical_Examination_id", referencedColumnName = "id")]
+    )
+    private var initialClinicalExamination: MutableList<InitialClinicalExamination>? = null
+
 
 
 
@@ -168,6 +184,15 @@ class Patient{
     fun getInsurance(): List<Insurance>?{
         return this.insurance
     }
+
+    fun getMedicalRecord(): MutableList<MedicalRecordEntry>? {
+        return this.medicalRecord
+    }
+
+    fun getInitialClinicalExamination(): MutableList<InitialClinicalExamination>? {
+        return this.initialClinicalExamination
+    }
+
 
     fun setPhone(phone: MutableList<Phone>){
         this.phone = phone

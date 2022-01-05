@@ -70,8 +70,21 @@ class AppointmentController {
             "",
             "",
             "",
-            mapOf("Appointment" to appointmentReceived)
+            mapOf("appointment" to appointmentReceived)
         ))
 
+    }
+
+    @GetMapping("/{id}")
+    fun getAppointment(@PathVariable id: Long): ResponseEntity<Response>{
+        return ResponseEntity.ok().body(Response(
+            LocalDateTime.now(),
+            HttpStatus.OK.value(),
+            HttpStatus.OK,
+            "",
+            "All appointments retrieved",
+            "",
+            mapOf("appointment" to (listOf(appointmentService.findAppointmentsById(id)))
+            )))
     }
 }
