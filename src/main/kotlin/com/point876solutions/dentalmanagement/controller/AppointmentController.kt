@@ -58,6 +58,7 @@ class AppointmentController {
         appointment?.addInvoice(invoice)
         if (appointment != null) {
             appointmentService.saveAppointment(appointment)
+            //Inform user of new
         }
         val location = ServletUriComponentsBuilder.fromCurrentServletMapping()
             .path("/{appointmentId}")

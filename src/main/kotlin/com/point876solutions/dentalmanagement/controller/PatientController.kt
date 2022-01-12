@@ -27,6 +27,11 @@ class PatientController {
             .buildAndExpand(patient?.getId()).toUri()
         val patientId: Long = patient?.getId()?: -1
         val patientReceived:Patient = patientService.findPatientById(patientId)!!
+        //Send email to patient informing they have been created in the system.
+        var mail = Mailer()
+        if (patient != null) {
+            mail?.sendMail(patient)
+        }
         return ResponseEntity.created(location).body(Response(
             LocalDateTime.now(),
             HttpStatus.CREATED.value(),
@@ -53,6 +58,7 @@ class PatientController {
 
     @GetMapping("/{id}")
     fun getPatient(@PathVariable id: Long): ResponseEntity<Response>{
+
         return ResponseEntity.ok().body(Response(
             LocalDateTime.now(),
             HttpStatus.OK.value(),

@@ -81,7 +81,7 @@ class InvoiceController {
                 "",
                 "",
                 "",
-                mapOf("invoice" to receivedInvoice)
+                mapOf("invoice" to listOf(receivedInvoice))
             ))
 
     }

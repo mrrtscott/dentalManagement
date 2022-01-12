@@ -92,6 +92,8 @@ class Patient{
     @Enumerated(EnumType.STRING)
     private var patientStatus: PatientStatus = PatientStatus.ALIVE
 
+    //NEED TO ADD JOIN FSTE
+
     constructor(
         email: String?,
         firstName: String?,
