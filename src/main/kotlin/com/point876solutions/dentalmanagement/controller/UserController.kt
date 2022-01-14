@@ -37,7 +37,7 @@ import kotlin.toString
 
 @RestController
 @RequestMapping(path = ["/", "/user"])
-class UserResource @Autowired constructor(
+class UserController @Autowired constructor(
     authenticationManager: AuthenticationManager,
     userService: UserService,
     jwtTokenProvider: JwtTokenProvider
